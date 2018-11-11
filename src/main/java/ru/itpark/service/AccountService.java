@@ -16,18 +16,18 @@ public class AccountService {
             int amount
     ) {
         if (amount < 0) {
-            return;
+            throw new IllegalArgumentException();
         }
         Account sender = repository.findById(senderId);
         if (sender == null) {
-            return;
+            throw new IllegalArgumentException();
         }
         if (sender.getBalance() < amount) {
-            return;
+            throw new IllegalArgumentException();
         }
         Account recipient = repository.findById(recipientId);
         if (recipient == null) {
-            return;
+            throw new IllegalArgumentException();
         }
 
         sender.setBalance(sender.getBalance() - amount);
